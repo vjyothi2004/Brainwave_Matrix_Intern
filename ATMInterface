@@ -1,0 +1,128 @@
+import java.util.Scanner;
+
+public class ATMInterface {
+	public static double balance=1000;
+
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		boolean flag=false;
+		System.out.println("Welcome to ATM Interface\n");
+		while(!flag) {
+			System.out.println("\nPlease select an option:");
+			System.out.println("1. Check Balance");
+            System.out.println("2. Deposit Funds");
+            System.out.println("3. Withdraw Funds");
+            System.out.println("4. Exit\n");
+            System.out.println("Enter your choice: ");
+            int choice=sc.nextInt();
+            switch(choice) {
+            case 1:
+            	checkBalance();
+                break;
+            case 2:
+            	depositFunds(sc);
+            	break;
+            case 3:
+            	withdrawFunds(sc);
+            	break;
+            case 4:
+            	System.out.println("Are you sure you want to exit? (yes/no): ");
+                String confirm = sc.next();
+                if (confirm.equalsIgnoreCase("yes")) {
+                    System.out.println("Thank you for using our service. Goodbye!");
+                    flag = true;
+                }
+                break;
+            default:
+                System.out.println("Invalid choice. Please try again.\n");
+            }
+            
+          }
+	}
+
+	public static void withdrawFunds(Scanner sc) {
+		System.out.println("\nEnter amount to withdraw:");
+		double withdraw_amount=sc.nextDouble();
+		if(withdraw_amount>0 && withdraw_amount<=balance ) {
+			balance-=withdraw_amount;
+			System.out.println("Rs."+withdraw_amount+" withdrawed sucessfully!!\nYour current balance is:"+balance);
+		}
+		else if (withdraw_amount > balance) {
+            System.out.println("Insufficient funds. Please enter a smaller amount.\n");
+        }
+		else {
+            System.out.println("Invalid withdrawal amount. Please enter a positive value.\n");
+        }
+	}
+
+	public static void depositFunds(Scanner sc) {
+		System.out.println("Please Enter the deposit Amount:");
+		double deposit_amount=sc.nextDouble();
+		if(deposit_amount>0) {
+			balance+=deposit_amount;
+			System.out.println("Rs."+deposit_amount+" deposited sucessfully!!\nYour current balance is:"+balance);
+		}
+		else {
+			System.out.println("Invalid deposit amount!Please enter a positive Value");
+		}
+	}
+
+	public static void checkBalance() {
+		System.out.println("Your Current balance is: Rs."+balance);
+	}
+
+}
+
+******************************************************************************************
+Output:
+Welcome to ATM Interface
+
+
+Please select an option:
+1. Check Balance
+2. Deposit Funds
+3. Withdraw Funds
+4. Exit
+
+Enter your choice: 
+1
+Your Current balance is: Rs.1000.0
+
+Please select an option:
+1. Check Balance
+2. Deposit Funds
+3. Withdraw Funds
+4. Exit
+
+Enter your choice: 
+2
+Please Enter the deposit Amount:
+10000
+Rs.10000.0 deposited sucessfully!!
+Your current balance is:11000.0
+
+Please select an option:
+1. Check Balance
+2. Deposit Funds
+3. Withdraw Funds
+4. Exit
+
+Enter your choice: 
+3
+
+Enter amount to withdraw:
+3000
+Rs.3000.0 withdrawed sucessfully!!
+Your current balance is:8000.0
+
+Please select an option:
+1. Check Balance
+2. Deposit Funds
+3. Withdraw Funds
+4. Exit
+
+Enter your choice: 
+4
+Are you sure you want to exit? (yes/no): 
+yes
+Thank you for using our service. Goodbye!
