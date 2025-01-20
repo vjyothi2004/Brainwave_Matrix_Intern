@@ -1,0 +1,202 @@
+package com.hospital;
+import java.util.*;
+
+//Main Class
+public class HospitalManagementSystem {
+ public static void main(String[] args) {
+     Hospital hospital = new Hospital();
+     hospital.startSystem();
+ }
+}
+
+//Hospital Class
+class Hospital {
+ private PatientManagement patientManagement = new PatientManagement();
+ private AppointmentScheduling appointmentScheduling = new AppointmentScheduling();
+ private BillingSystem billingSystem = new BillingSystem();
+ private InventoryManagement inventoryManagement = new InventoryManagement();
+ private StaffManagement staffManagement = new StaffManagement();
+
+ public void startSystem() {
+     Scanner scanner = new Scanner(System.in);
+     while (true) {
+         System.out.println("\nWelcome to the Hospital Management System");
+         System.out.println("1. Patient Management");
+         System.out.println("2. Appointment Scheduling");
+         System.out.println("3. Billing and Invoicing");
+         System.out.println("4. Inventory Management");
+         System.out.println("5. Staff Management");
+         System.out.println("6. Exit");
+         System.out.print("Enter your choice: ");
+
+         int choice = scanner.nextInt();
+         switch (choice) {
+             case 1:
+                 patientManagement.managePatients();
+                 break;
+             case 2:
+                 appointmentScheduling.scheduleAppointments();
+                 break;
+             case 3:
+                 billingSystem.manageBilling();
+                 break;
+             case 4:
+                 inventoryManagement.manageInventory();
+                 break;
+             case 5:
+                 staffManagement.manageStaff();
+                 break;
+             case 6:
+                 System.out.println("Exiting system. Goodbye!");
+                 return;
+             default:
+                 System.out.println("Invalid choice. Please try again.");
+         }
+     }
+ }
+}
+
+//Patient Management Module
+class PatientManagement {
+ private List<Patient> patients = new ArrayList<>();
+
+ public void managePatients() {
+     Scanner scanner = new Scanner(System.in);
+     System.out.println("\nPatient Management");
+     System.out.println("1. Register New Patient");
+     System.out.println("2. View All Patients");
+     System.out.print("Enter your choice: ");
+     int choice = scanner.nextInt();
+
+     switch (choice) {
+         case 1:
+             registerPatient();
+             break;
+         case 2:
+             viewPatients();
+             break;
+         default:
+             System.out.println("Invalid choice.");
+     }
+ }
+
+ private void registerPatient() {
+     Scanner scanner = new Scanner(System.in);
+     System.out.print("Enter Patient Name: ");
+     String name = scanner.nextLine();
+     System.out.print("Enter Patient Age: ");
+     int age = scanner.nextInt();
+     System.out.print("Enter Patient ID: ");
+     int id = scanner.nextInt();
+
+     patients.add(new Patient(id, name, age));
+     System.out.println("Patient Registered Successfully!");
+ }
+
+ private void viewPatients() {
+     System.out.println("\nList of Patients:");
+     for (Patient patient : patients) {
+         System.out.println(patient);
+     }
+ }
+}
+
+class Patient {
+ private int id;
+ private String name;
+ private int age;
+
+ public Patient(int id, String name, int age) {
+     this.id = id;
+     this.name = name;
+     this.age = age;
+ }
+
+ @Override
+ public String toString() {
+     return "ID: " + id + ", Name: " + name + ", Age: " + age;
+ }
+}
+
+//Appointment Scheduling Module
+class AppointmentScheduling {
+ private List<Appointment> appointments = new ArrayList<>();
+
+ public void scheduleAppointments() {
+     Scanner scanner = new Scanner(System.in);
+     System.out.println("\nAppointment Scheduling");
+     System.out.println("1. Schedule New Appointment");
+     System.out.println("2. View All Appointments");
+     System.out.print("Enter your choice: ");
+     int choice = scanner.nextInt();
+
+     switch (choice) {
+         case 1:
+             scheduleNewAppointment();
+             break;
+         case 2:
+             viewAppointments();
+             break;
+         default:
+             System.out.println("Invalid choice.");
+     }
+ }
+
+ private void scheduleNewAppointment() {
+     Scanner scanner = new Scanner(System.in);
+     System.out.print("Enter Patient ID: ");
+     int patientId = scanner.nextInt();
+     scanner.nextLine(); // Consume newline
+     System.out.print("Enter Appointment Date (YYYY-MM-DD): ");
+     String date = scanner.nextLine();
+
+     appointments.add(new Appointment(patientId, date));
+     System.out.println("Appointment Scheduled Successfully!");
+ }
+
+ private void viewAppointments() {
+     System.out.println("\nList of Appointments:");
+     for (Appointment appointment : appointments) {
+         System.out.println(appointment);
+     }
+ }
+}
+
+class Appointment {
+ private int patientId;
+ private String date;
+
+ public Appointment(int patientId, String date) {
+     this.patientId = patientId;
+     this.date = date;
+ }
+
+ @Override
+ public String toString() {
+     return "Patient ID: " + patientId + ", Date: " + date;
+ }
+}
+
+//Billing System Module
+class BillingSystem {
+ public void manageBilling() {
+     System.out.println("\nBilling and Invoicing");
+     System.out.println("Feature under development.");
+ }
+}
+
+//Inventory Management Module
+class InventoryManagement {
+ public void manageInventory() {
+     System.out.println("\nInventory Management");
+     System.out.println("Feature under development.");
+ }
+}
+
+//Staff Management Module
+class StaffManagement {
+ public void manageStaff() {
+     System.out.println("\nStaff Management");
+     System.out.println("Feature under development.");
+ }
+}
